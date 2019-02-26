@@ -54,9 +54,16 @@ startBtn.addEventListener('click', function(e) {
     document.querySelector('.correct').innerText = currentQuestionAnswer;
     document.querySelector('.correct').classList.remove('fake');
     let fake = document.querySelectorAll('.fake');
-    for (let i = 0; i < fake.length; i++) {
-        fake[i].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
-    }  
+    fake[0].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+    fake[1].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+    fake[2].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+
+    if (fake[0] == fake[1] || fake[0] == fake[2] || fake[1] == fake[2]) {
+        fake[0].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+        fake[1].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+        fake[2].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+    }
+   
     
     
     startBtn.classList.add('hidden');
