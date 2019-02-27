@@ -41,31 +41,56 @@ let currentQuestionObject = "";
 let currentQuestionAnswer = "";
 let currentQuestion = "";
 
-
-
-
-startBtn.addEventListener('click', function(e) {
-    e.preventDefault;
-    currentQuestionObject = countries[Math.floor(Math.random()*countries.length)];
-    currentQuestionAnswer = currentQuestionObject.capital;
-    currentQuestion = currentQuestionObject.country;
-    question.innerText = currentQuestion;
-    answer[Math.floor(Math.random()*answer.length)].classList.add('correct');
-    document.querySelector('.correct').innerText = currentQuestionAnswer;
-    document.querySelector('.correct').classList.remove('fake');
-    let fake = document.querySelectorAll('.fake');
-    fake[0].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
-    fake[1].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
-    fake[2].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
-
-    if (fake[0] == fake[1] || fake[0] == fake[2] || fake[1] == fake[2]) {
-        fake[0].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
-        fake[1].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
-        fake[2].innerText = fakeAnswers[Math.floor(Math.random()*fakeAnswers.length)];
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-   
-    
-    
-    startBtn.classList.add('hidden');
+};
 
-})
+function NextRound() {
+    currentQuestionObject = countries[Math.floor(Math.random()*countries.length)];
+        currentQuestionAnswer = currentQuestionObject.capital;
+        currentQuestion = currentQuestionObject.country;
+        question.innerText = currentQuestion;
+
+        answer[Math.floor(Math.random()*answer.length)].classList.add('correct');
+        document.querySelector('.correct').innerText = currentQuestionAnswer;
+        document.querySelector('.correct').classList.remove('fake');
+        
+        let fake = document.querySelectorAll('.fake');
+        
+        shuffleArray(fakeAnswers);
+
+        fake.forEach(function(element, index) {
+            element.innerText = fakeAnswers[index];
+        })
+
+}
+
+
+function Game() {
+
+    startBtn.addEventListener('click', function(e) {
+        e.preventDefault;
+        NextRound();
+        
+        startBtn.classList.add('hidden');
+
+        answer.forEach(function(e,i) {
+            e.addEventListener('click', function(element) {
+                element.preventDefault; 
+                if (element.classList == "correct") {
+                    console.log(this)
+                }
+            })
+        })
+    
+    });
+    
+      
+
+
+};
+
+Game();
