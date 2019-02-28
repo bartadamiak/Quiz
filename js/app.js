@@ -1,6 +1,6 @@
 const question = document.querySelector('.question p');
 const answer = document.querySelectorAll('.answer');
-const fakeAnswers = ["San Antonio", 'Kapsztad', 'Warszawa', 'Tokjo', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
+const fakeAnswers = ["La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokjo', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
 
 
 const startBtn = document.querySelector('.start-btn');
@@ -33,13 +33,25 @@ const countries = [
     Benin = {
         country: "Benin",
         capital: "Porto-Novo"
+    },
+    Bośnia = {
+        country: "Bośnia",
+        capital: "Sarajewo"
+    },
+    Gabon = {
+        country: "Gabon",
+        capital: "Libreville"
     }
 ];
-console.log(countries);
+
 
 let currentQuestionObject = "";
 let currentQuestionAnswer = "";
 let currentQuestion = "";
+
+let generalCounter = 0;
+let correctCounter = 0;
+let counter = document.querySelector('.counter');
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -47,6 +59,8 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 };
+
+
 
 function NextRound() {
     currentQuestionObject = countries[Math.floor(Math.random()*countries.length)];
@@ -64,7 +78,9 @@ function NextRound() {
 
         fake.forEach(function(element, index) {
             element.innerText = fakeAnswers[index];
-        })
+        });
+
+        
 
 }
 
@@ -79,12 +95,19 @@ function Game() {
 
         answer.forEach(function(e,i) {
             e.addEventListener('click', function(element) {
-                element.preventDefault; 
-                if (element.classList == "correct") {
-                    console.log(this)
-                }
+
+                this.classList.contains('correct') ? correctCounter += 1 : console.log("wrong");
+
+                document.querySelector('.correct').classList.add('fake');
+                document.querySelector('.correct').classList.remove('correct');
+
+                
+
+                NextRound();
             })
         })
+
+        
     
     });
     
