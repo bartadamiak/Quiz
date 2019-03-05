@@ -44,6 +44,8 @@ const countries = [
     }
 ];
 
+let checkAnswer = [];
+
 
 let currentQuestionObject = "";
 let currentQuestionAnswer = "";
@@ -80,7 +82,9 @@ function NextRound() {
             element.innerText = fakeAnswers[index];
         });
 
-        
+};
+
+function False() {
 
 }
 
@@ -96,14 +100,21 @@ function Game() {
         answer.forEach(function(e,i) {
             e.addEventListener('click', function(element) {
 
-                this.classList.contains('correct') ? correctCounter += 1 : console.log("wrong");
+                this.classList.contains('correct') ? correctCounter += 1 : this.classList.add('false');
+                generalCounter +=1;
+
+                if (this.classList.contains('fake')) {
+                    checkAnswer.push(question.innerText)
+                };
 
                 document.querySelector('.correct').classList.add('fake');
                 document.querySelector('.correct').classList.remove('correct');
+                
+                generalCounter == 10 ? document.querySelector('.counter').innerText = "Twój wynik to: " + correctCounter + "/" + generalCounter : NextRound();
 
                 
 
-                NextRound();
+                
             })
         })
 
