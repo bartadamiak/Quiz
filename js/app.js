@@ -1,7 +1,7 @@
 const question = document.querySelector('.question p');
 const answer = document.querySelectorAll('.answer');
 const fakeAnswers = ["La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokjo', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
-
+const checkAnswer = document.querySelector('.checkAnswer')
 
 const startBtn = document.querySelector('.start-btn');
 
@@ -44,6 +44,7 @@ const countries = [
     }
 ];
 
+let falseObject = {};
 let checkAnswer = [];
 
 
@@ -85,6 +86,7 @@ function NextRound() {
 };
 
 function False() {
+    
 
 }
 
@@ -97,15 +99,17 @@ function Game() {
         
         startBtn.classList.add('hidden');
 
-        answer.forEach(function(e,i) {
+        answer.forEach(function(e, i) {
             e.addEventListener('click', function(element) {
 
                 this.classList.contains('correct') ? correctCounter += 1 : this.classList.add('false');
                 generalCounter +=1;
 
                 if (this.classList.contains('fake')) {
-                    checkAnswer.push(question.innerText)
+                    falseObject = {country: question.innerText, your: this.innerText, correct: document.querySelector('.correct').innerText}
+                    checkAnswer.push(falseObject)
                 };
+                console.log(checkAnswer)
 
                 document.querySelector('.correct').classList.add('fake');
                 document.querySelector('.correct').classList.remove('correct');
