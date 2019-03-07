@@ -88,10 +88,11 @@ function shuffleArray(array) {
     }
 };
 
+///////////////// Licznik \\\\\\\\\\\\\\\\\\\
+
 let timeCounter = 0;
 
-function TimeFirst(time) {
-    
+let timeOut = function TimeFirst(time) {
     setInterval(function() {
         time -= 1;
         timeElement.innerText = time;
@@ -100,8 +101,13 @@ function TimeFirst(time) {
 }
 
 function NextRound(tab) {
+    ///////////// Ustawianie Licznika \\\\\\\\\\\\\\\\\\\
+    clearInterval(timeOut);
+
     timeCounter = 10;
-    TimeFirst(timeCounter);
+    timeOut(timeCounter);
+    
+
     currentQuestionObject = tab[Math.floor(Math.random()*countries.length)];
     currentQuestionAnswer = currentQuestionObject.capital;
     currentQuestion = currentQuestionObject.country;
@@ -152,13 +158,13 @@ function Game(buttonStart, buttonAnswer) {
 
     buttonStart.addEventListener('click', function(e) {
         e.preventDefault;
-        
         NextRound(countries);
 
         
         buttonStart.classList.add('hidden');
 
         buttonAnswer.forEach(function(e, i) {
+            
             e.addEventListener('click', function(element) {
                 
 
