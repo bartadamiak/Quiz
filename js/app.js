@@ -1,7 +1,7 @@
 const question = document.querySelector('.question p');
 const answer = document.querySelectorAll('.answer');
 const fakeAnswers = ["La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokjo', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
-const checkAnswer = document.querySelector('.checkAnswer')
+const checkAnswer = document.querySelector('.checkAnswer ul')
 
 const startBtn = document.querySelector('.start-btn');
 
@@ -45,7 +45,7 @@ const countries = [
 ];
 
 let falseObject = {};
-let checkAnswer = [];
+let checkAnswerTab = [];
 
 
 let currentQuestionObject = "";
@@ -85,10 +85,21 @@ function NextRound() {
 
 };
 
-function False() {
-    
 
+
+function False(tab) {
+
+    tab.forEach(function(e, i) {
+        let listOfFalse = document.createElement('li');
+        listOfFalse.innerText = e.country;
+        checkAnswer.append(listOfFalse);
+    });
 }
+
+        
+        
+
+
 
 
 function Game() {
@@ -107,28 +118,30 @@ function Game() {
 
                 if (this.classList.contains('fake')) {
                     falseObject = {country: question.innerText, your: this.innerText, correct: document.querySelector('.correct').innerText}
-                    checkAnswer.push(falseObject)
+                    checkAnswerTab.push(falseObject)
                 };
-                console.log(checkAnswer)
-
+                
                 document.querySelector('.correct').classList.add('fake');
                 document.querySelector('.correct').classList.remove('correct');
                 
                 generalCounter == 10 ? document.querySelector('.counter').innerText = "Twój wynik to: " + correctCounter + "/" + generalCounter : NextRound();
-
                 
-
-                
+                if (generalCounter == 10 && correctCounter < 10) {
+                    False(checkAnswerTab)
+                }
             })
         })
+    });
+};
+                
+Game();
+
+                
 
         
     
-    });
+    
     
       
 
 
-};
-
-Game();
