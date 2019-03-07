@@ -1,7 +1,8 @@
 const question = document.querySelector('.question p');
 const answer = document.querySelectorAll('.answer');
 const fakeAnswers = ["La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokjo', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
-const checkAnswer = document.querySelector('.checkAnswer ul')
+const checkAnswer = document.querySelector('.checkAnswer ul');
+const timeElement = document.querySelector('.time');
 
 const startBtn = document.querySelector('.start-btn');
 
@@ -41,6 +42,30 @@ let countries = [
     Gabon = {
         country: "Gabon",
         capital: "Libreville"
+    },
+    Afganistan = {
+        country: "Afganistan",
+        capital: "Kabul"
+    },
+    Angola = {
+        country: "Angola",
+        capital: "Luanda"
+    },
+    Bahrajn = {
+        country: "Bahrajn",
+        capital: "Manama"
+    },
+    Bostwana = {
+        country: "Bostwana",
+        capital: "Gaborone"
+    },
+    Wenezuela = {
+        country: "Wenezuela",
+        capital: "Caracas"
+    },
+    Uzbekistan = {
+        country: "Uzbekistan",
+        capital: "Taszkent"
     }
 ];
 
@@ -63,9 +88,20 @@ function shuffleArray(array) {
     }
 };
 
+let timeCounter = 0;
 
+function TimeFirst(time) {
+    
+    setInterval(function() {
+        time -= 1;
+        timeElement.innerText = time;
+    }, 1000);
+    
+}
 
 function NextRound(tab) {
+    timeCounter = 10;
+    TimeFirst(timeCounter);
     currentQuestionObject = tab[Math.floor(Math.random()*countries.length)];
     currentQuestionAnswer = currentQuestionObject.capital;
     currentQuestion = currentQuestionObject.country;
@@ -77,17 +113,6 @@ function NextRound(tab) {
         }
     })
     
-
-    // tab.forEach(function(e, i) {
-    //     currentQuestion == e.country ? console.log(e.country) : console.log('brak')
-    // })
-    
-    // if (currentQuestion == currentQuestionObject.country) {
-    //     console.log(currentQuestion.indexOf())
-    // }
-
-        
-
     answer[Math.floor(Math.random()*answer.length)].classList.add('correct');
     document.querySelector('.correct').innerText = currentQuestionAnswer;
     document.querySelector('.correct').classList.remove('fake');
@@ -102,6 +127,9 @@ function NextRound(tab) {
     });
 
 };
+
+
+
 
 
 
@@ -124,12 +152,15 @@ function Game(buttonStart, buttonAnswer) {
 
     buttonStart.addEventListener('click', function(e) {
         e.preventDefault;
+        
         NextRound(countries);
+
         
         buttonStart.classList.add('hidden');
 
         buttonAnswer.forEach(function(e, i) {
             e.addEventListener('click', function(element) {
+                
 
                 this.classList.contains('correct') ? correctCounter += 1 : this.classList.add('false');
                 generalCounter +=1;
