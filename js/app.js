@@ -1,6 +1,7 @@
+const questionBack = document.querySelector('.flag');
 const question = document.querySelector('.question p');
 const answer = document.querySelectorAll('.answer');
-const fakeAnswers = ["La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokjo', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
+const fakeAnswers = ["Mińsk", "Los Angeles", "Tijuana", "Austin", "Buenos Aires", "Nassau", "Katmandu", "Ułan Bator", "Naypyidaw", "Port Louis", "Ryga", "Maseru", "Doha", "La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokio', 'Jafa', 'Madryt', 'Akra', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
 const checkAnswer = document.querySelector('.checkAnswer ul');
 const timeElement = document.querySelector('.time');
 
@@ -9,63 +10,123 @@ const startBtn = document.querySelector('.start-btn');
 let countries = [
     Nigeria = {
     country: "Nigeria",
-    capital: "Abudża"
+    capital: "Abudża",
+    flag: "url('../images/Nigeria.svg')"
     }, 
     Meksyk = {
     country: "Meksyk",
-    capital: "Mexico City"
+    capital: "Mexico City",
+    flag: "url('../images/Mexico.svg')"
     },
     Maroko = {
         country: "Maroko",
-        capital: "Rabat"
+        capital: "Rabat",
+        flag: "url('../images/Marocco.svg')"
     },
     Egipt = {
         country: "Egipt",
         capital: "Kair",
+        flag: "url('../images/Egypt.svg')"
     },
     Rwanda = {
         country: "Rwanda",
-        capital: "Kigali"
+        capital: "Kigali",
+        flag: "url('../images/Rwanda.svg')"
     },
     Zimbabwe = {
         country: "Zimbabwe",
-        capital: "Harare"
+        capital: "Harare",
+        flag: "url('../images/Zimbabwe.svg')"
     },
     Benin = {
         country: "Benin",
-        capital: "Porto-Novo"
+        capital: "Porto-Novo",
+        flag: "url('../images/Benin.svg')"
     },
     Bośnia = {
-        country: "Bośnia",
-        capital: "Sarajewo"
+        country: "Bośnia i Hercegowina",
+        capital: "Sarajewo",
+        flag: "url('../images/Bosnia.svg')"
     },
     Gabon = {
         country: "Gabon",
-        capital: "Libreville"
+        capital: "Libreville",
+        flag: "url('../images/Gabon.svg')"
     },
     Afganistan = {
         country: "Afganistan",
-        capital: "Kabul"
+        capital: "Kabul",
+        flag: "url('../images/Afganistan.svg')"
     },
     Angola = {
         country: "Angola",
-        capital: "Luanda"
+        capital: "Luanda",
+        flag: "url('../images/Angola.svg')"
     },
     Bahrajn = {
         country: "Bahrajn",
-        capital: "Manama"
+        capital: "Manama",
+        flag: "url('../images/Bahrain.svg')"
     },
-    Bostwana = {
-        country: "Bostwana",
-        capital: "Gaborone"
+    Botswana = {
+        country: "Botswana",
+        capital: "Gaborone",
+        flag: "url('../images/Botswana.svg')"
     },
     Wenezuela = {
         country: "Wenezuela",
-        capital: "Caracas"
+        capital: "Caracas",
+        flag: "url('../images/Wenezuela.svg')"
     },
     Uzbekistan = {
         country: "Uzbekistan",
-        capital: "Taszkent"
+        capital: "Taszkent",
+        flag: "url('../images/Uzbekistan.svg')"
+    },
+    WyspySalomona = {
+        country: "Wyspy Salomona",
+        capital: "Honiara",
+        flag: "url('../images/Wyspy_Salomona.svg')"
+    },
+    Urugwaj = {
+        country: "Urugwaj",
+        capital: "Montevideo",
+        flag: "url('../images/Urugwaj.svg')"
+    },
+    Turkmenistan = {
+        country: "Turkmenistan",
+        capital: "Aszchabad",
+        flag: "url('../images/Turkmenistan.svg')"
+    },
+    Togo = {
+        country: "Togo",
+        capital: "Lome",
+        flag: "url('../images/Togo.svg')"
+    },
+    Syria = {
+        country: "Syria",
+        capital: "Damaszek",
+        flag: "url('../images/Syria.svg')"
+    },
+    Somalia = {
+        country: "Somalia",
+        capital: "Mogadiszu",
+        flag: "url('../images/Somalia.svg')"
+    },
+    Sudan = {
+        country: "Sudan",
+        capital: "Chartum",
+        flag: "url('../images/Sudan.svg')"
+    },
+    Pakistan = {
+        country: "Pakistan",
+        capital: "Islamabad",
+        flag: "url('../images/Pakistan.svg')"
+    },
+    Portugalia = {
+        country: "Portugalia",
+        capital: "Lizbona",
+        flag: "url('../images/Portugalia.svg')"
     }
 ];
 
@@ -102,16 +163,17 @@ let timeOut = function TimeFirst(time) {
 
 function NextRound(tab) {
     ///////////// Ustawianie Licznika \\\\\\\\\\\\\\\\\\\
-    clearInterval(timeOut);
+    // clearInterval(timeOut);
 
-    timeCounter = 10;
-    timeOut(timeCounter);
-    
-
+    // timeCounter = 10;
+    // timeOut(timeCounter);
     currentQuestionObject = tab[Math.floor(Math.random()*countries.length)];
     currentQuestionAnswer = currentQuestionObject.capital;
     currentQuestion = currentQuestionObject.country;
     question.innerText = currentQuestion;
+    questionBack.style.background = currentQuestionObject.flag;
+    questionBack.style.backgroundSize = "contain";
+    questionBack.style.backgroundRepeat = "no-repeat";
 
     tab.forEach(function(e,i) {
         if (currentQuestion == e.country) {
