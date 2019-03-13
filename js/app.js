@@ -4,6 +4,7 @@ const answer = document.querySelectorAll('.answer');
 const fakeAnswers = ["Mińsk", "Los Angeles", "Tijuana", "Austin", "Buenos Aires", "Nassau", "Katmandu", "Ułan Bator", "Naypyidaw", "Port Louis", "Ryga", "Maseru", "Doha", "La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokio', 'Jafa', 'Madryt', 'Akra', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
 const checkAnswer = document.querySelector('.checkAnswer ul');
 const timeElement = document.querySelector('.time');
+const again = document.querySelector('.start-again')
 
 const startBtn = document.querySelector('.start-btn');
 
@@ -174,6 +175,7 @@ function NextRound(tab) {
     questionBack.style.background = currentQuestionObject.flag;
     questionBack.style.backgroundSize = "contain";
     questionBack.style.backgroundRepeat = "no-repeat";
+    document.querySelector('.answers').classList.remove('hidden');
 
     tab.forEach(function(e,i) {
         if (currentQuestion == e.country) {
@@ -202,7 +204,6 @@ function NextRound(tab) {
 
 
 function False(tab) {
-
     tab.forEach(function(e, i) {
         let listOfFalse = document.createElement('li');
         listOfFalse.innerText = e.country;
@@ -244,10 +245,15 @@ function Game(buttonStart, buttonAnswer) {
                 generalCounter == 10 ? document.querySelector('.counter').innerText = "Twój wynik to: " + correctCounter + "/" + generalCounter : NextRound(countries);
                 
                 if (generalCounter == 10 && correctCounter < 10) {
-                    False(checkAnswerTab)
+                    False(checkAnswerTab);
+                    document.querySelector('.question').classList.add('hidden');
+                    document.querySelector('.answers').classList.add('hidden');
+                    again.classList.remove('hidden');
+                   
                 }
             })
-        })
+        });
+       
     });
 };
                 

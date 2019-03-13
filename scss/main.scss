@@ -75,7 +75,24 @@ body {
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
-  }
+}
+.play {
+    width: 500px;
+    height: 100px;
+    background: orangered;
+    border: 1px solid black;
+    color: white;
+    font-size: 50px;
+    font-weight: 900;
+    cursor: pointer;
+
+};
+.play:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
   
   @keyframes shake {
     10%, 90% {
@@ -95,9 +112,8 @@ body {
     }
   }
 
-.start {
-    width: 200px;
-    height: 50px;
+.checkAnswer {
+    color: white;
 }
 
 .hidden {
