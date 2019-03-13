@@ -206,7 +206,7 @@ function NextRound(tab) {
 function False(tab) {
     tab.forEach(function(e, i) {
         let listOfFalse = document.createElement('li');
-        listOfFalse.innerText = e.country;
+        listOfFalse.innerText = e.country + ": Twoja odpowiedź to " + e.your + ", poprawna odpowiedź to " + e.correct;
         checkAnswer.append(listOfFalse);
     });
 }
