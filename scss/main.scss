@@ -7,7 +7,7 @@
 }
 
 body {
-    font-family: 'Sniglet', cursive;
+    font-family: 'Markazi Text', serif;
 
 }
 
@@ -85,6 +85,7 @@ body {
     font-size: 50px;
     font-weight: 900;
     cursor: pointer;
+    outline: none;
 
 };
 .play:hover {
@@ -113,13 +114,13 @@ body {
   }
 
 .checkAnswer {
-    
+    border: 1px solid black;
     padding: 20px;
     line-height: 2;
-    
-    margin: 40px;
+    background: rgb(72,74,102);
+    margin: 30px;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     li {
         list-style: none;
     }

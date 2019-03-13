@@ -4,7 +4,8 @@ const answer = document.querySelectorAll('.answer');
 const fakeAnswers = ["Mińsk", "Los Angeles", "Tijuana", "Austin", "Buenos Aires", "Nassau", "Katmandu", "Ułan Bator", "Naypyidaw", "Port Louis", "Ryga", "Maseru", "Doha", "La Paz", "Tallinn", "Manila", "San Antonio", 'Kapsztad', 'Warszawa', 'Tokio', 'Jafa', 'Madryt', 'Akra', 'Pekin', 'Sydney', 'Nashville', 'Wagadugu', 'Hanoi', 'Port Moresby'];
 const checkAnswer = document.querySelector('.checkAnswer ul');
 const timeElement = document.querySelector('.time');
-const again = document.querySelector('.start-again')
+const again = document.querySelector('.start-again');
+const check = document.querySelector('.checkAnswer');
 
 const startBtn = document.querySelector('.start-btn');
 
@@ -150,24 +151,7 @@ function shuffleArray(array) {
     }
 };
 
-///////////////// Licznik \\\\\\\\\\\\\\\\\\\
-
-let timeCounter = 0;
-
-let timeOut = function TimeFirst(time) {
-    setInterval(function() {
-        time -= 1;
-        timeElement.innerText = time;
-    }, 1000);
-    
-}
-
 function NextRound(tab) {
-    ///////////// Ustawianie Licznika \\\\\\\\\\\\\\\\\\\
-    // clearInterval(timeOut);
-
-    // timeCounter = 10;
-    // timeOut(timeCounter);
     currentQuestionObject = tab[Math.floor(Math.random()*countries.length)];
     currentQuestionAnswer = currentQuestionObject.capital;
     currentQuestion = currentQuestionObject.country;
@@ -206,7 +190,7 @@ function NextRound(tab) {
 function False(tab) {
     tab.forEach(function(e, i) {
         let listOfFalse = document.createElement('li');
-        listOfFalse.innerText = e.country + ": Twoja odpowiedź to " + e.your + ", poprawna odpowiedź to " + e.correct;
+        listOfFalse.innerText = e.country + ": stolicą jest " + e.correct;
         checkAnswer.append(listOfFalse);
     });
 }
@@ -217,7 +201,7 @@ function False(tab) {
 
 
 
-function Game(buttonStart, buttonAnswer) {
+function Game(buttonStart, buttonAnswer, buttonAgain) {
 
     buttonStart.addEventListener('click', function(e) {
         e.preventDefault;
@@ -242,22 +226,25 @@ function Game(buttonStart, buttonAnswer) {
                 document.querySelector('.correct').classList.add('fake');
                 document.querySelector('.correct').classList.remove('correct');
                 
-                generalCounter == 10 ? document.querySelector('.counter').innerText = "Twój wynik to: " + correctCounter + "/" + generalCounter : NextRound(countries);
+                generalCounter == 15 ? document.querySelector('.counter').innerText = "Twój wynik to: " + correctCounter + "/" + generalCounter : NextRound(countries);
                 
-                if (generalCounter == 10 && correctCounter < 10) {
+                if (generalCounter == 15 && correctCounter < 15) {
                     False(checkAnswerTab);
                     document.querySelector('.question').classList.add('hidden');
                     document.querySelector('.answers').classList.add('hidden');
                     again.classList.remove('hidden');
-                   
+                    check.classList.remove('hidden');
                 }
             })
         });
-       
+        
+       buttonAgain.addEventListener('click', function(e) {
+           location.reload();
+       })
     });
 };
                 
-Game(startBtn, answer);
+Game(startBtn, answer, again);
 
                 
 
