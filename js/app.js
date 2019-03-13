@@ -190,7 +190,7 @@ function NextRound(tab) {
 function False(tab) {
     tab.forEach(function(e, i) {
         let listOfFalse = document.createElement('li');
-        listOfFalse.innerText = e.country + ": stolicą jest " + e.correct;
+        listOfFalse.innerText = e.country + ". Zaznaczyłeś: " + e.your + ". Poprawna odpowiedź to: " + e.correct
         checkAnswer.append(listOfFalse);
     });
 }
@@ -232,9 +232,13 @@ function Game(buttonStart, buttonAnswer, buttonAgain) {
                     False(checkAnswerTab);
                     document.querySelector('.question').classList.add('hidden');
                     document.querySelector('.answers').classList.add('hidden');
-                    again.classList.remove('hidden');
+                    
                     check.classList.remove('hidden');
+                };
+                if (generalCounter == 15) {
+                    again.classList.remove('hidden');
                 }
+
             })
         });
         
